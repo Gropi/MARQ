@@ -1,0 +1,20 @@
+{
+  "profiles": {
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    },
+    "FREncapsulation": {
+      "commandName": "Project",
+      "commandLineArgs": "fr"
+    },
+    "TSEncapsulation": {
+      "commandName": "Project",
+      "commandLineArgs": "ts"
+    },
+    "DummyEncapsulation": {
+      "commandName": "Project",
+      "commandLineArgs": "dummy"
+    }
+  }
+}

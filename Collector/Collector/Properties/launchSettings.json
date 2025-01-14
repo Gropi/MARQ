@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Collector": {
+      "commandName": "Project",
+      "commandLineArgs": "serveAndCollect -p 2004  -t \"127.0.0.1\""
+    }
+  }
+}

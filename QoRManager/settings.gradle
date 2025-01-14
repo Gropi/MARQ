@@ -1,0 +1,4 @@
+rootProject.name = '01_QoR-Simulator'
+include 'Server'
+include 'Shared'
+include 'JMH'

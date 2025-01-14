@@ -1,0 +1,179 @@
+syntax = "proto3";
+
+option java_package="Network.DataModel";
+option csharp_namespace="Collector.Communication.DataModel";
+
+enum Types {
+	LATENCY = 0;
+	CPU = 1; 
+	RAM = 2;
+	TIME = 3;
+}
+
+enum NetworkRequestType {
+	ICMP = 0;
+	TCP = 1;
+}
+
+message NetworkRequest {
+	string target = 1;
+	optional int32 port = 2;
+	NetworkRequestType type = 3;
+}
+
+message MeasurementInformation {
+	int32 frequency = 1;
+	optional int32 duration = 2;
+	int32 expectedValue = 3;
+	int32 positiveFailure = 4;
+	int32 negativeFailure = 5;
+}
+
+message Subscribe {
+	Types type = 1;
+	optional NetworkRequest request = 2;
+	MeasurementInformation information = 3;
+}
+
+message UpdateSubscription {
+	Types type = 1;
+	optional NetworkRequest request = 2;
+	MeasurementInformation information = 3;
+}
+
+message Unsubscribe {
+	Types type = 1;
+	optional NetworkRequest request = 2;
+}
+
+message MeasurementEvent {
+	string UUID = 1;
+	oneof message_oneof {
+		NetworkMeasurement network = 2;
+		RamMeasurement ram = 3;
+		CpuMeasurement cpu = 4;
+	}
+}
+
+message SubscriptionLifecycle {
+	optional string targetID = 1;
+	int32 managementPort = 2;
+	oneof message_oneof {
+		Subscribe sub = 3;
+		UpdateSubscription updateSubscription = 4;
+		Unsubscribe unsubscribe = 5;
+	}
+}
+
+message TaskLifecycle {
+	string senderID = 1;
+	string appID = 2;
+	repeated ProcessState processStates = 3;
+	oneof message_oneof{
+		TaskRequest taskRequest = 4;
+		TargetUpdate targetUpdate = 5;
+		TerminationMessage terminationMessage = 6;
+		ReturnMessage returnMessage = 7;
+	}
+}
+
+message ReturnMessage {
+	repeated string result = 1;
+}
+
+message TargetUpdate {
+	repeated Endpoint targets = 1;
+}
+
+message ProcessState {
+	string key = 1;
+	int32 value = 2;
+}
+
+message NetworkMeasurement {
+	string targetID = 1;
+	double id = 2;
+	int64 rtt = 3;
+	string sender = 4;
+	string senderType = 5;
+	string targetAddress = 6;
+	optional string latitude = 7;
+	optional string longitude = 8;
+	string date = 9;
+	string time = 10;
+	optional int32 ttl = 11;
+	optional int32 bufferLength = 12;
+	NetworkRequestType measurementType = 13;
+}
+
+message RamMeasurement {
+	double id = 1;
+	int32 availableMemory = 2;
+	string date = 3;
+	string time = 4;
+}
+
+message CpuMeasurement {
+	double id = 1;
+	double cpuUsage = 2;
+	string date = 3;
+	string time = 4;
+}
+
+message ServiceRegistrationMessage {
+	string ID = 1;
+	optional string executionName = 2;
+	repeated PurposePort purposePort = 3;
+	int32 handlerPort = 4;
+}
+
+message PurposePort {
+	string purpose = 1;
+	int32 port = 2;
+}
+
+message ApplicationStartMessage {
+	string applicationName = 1;
+	string graphLocation = 2;
+	string decisionMaker = 3;
+	repeated string content = 4;
+}
+
+message ApplicationEndMessage {
+	string applicationID = 1;
+}
+
+message TaskRequest {
+	repeated string content = 1;
+	repeated Endpoint targets = 2;
+	optional string managementIP = 3;
+	int32 managementPort = 4;
+}
+
+message Endpoint {
+	string IP = 1;
+	int32 port  = 2;
+}
+
+message TerminationMessage {
+	string UUID = 1;
+	double executionTime = 2;
+	double idleTime = 3;
+	double transmissionTime = 4;
+	optional string Error = 5;
+}
+
+// --------------------------- ONLY FOR TEST SETUP --------------------------
+message TestSetupMessage {
+	repeated TestSetupParameter simulatedParameters = 1;
+	int32 junkMB = 2;
+	int32 callsToWaitFor = 3;
+	bool isEndVertex = 4;
+}
+
+message TestSetupParameter {
+	Types parameterType = 1;
+	int32 expectedValue = 2;
+	optional int32 negativePercentage = 3;
+	optional int32 positivePercentage = 4;
+}

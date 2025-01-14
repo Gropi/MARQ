@@ -1,0 +1,50 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+group 'de.TU.Darmstadt.TK'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    google()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ["src"]
+            exclude "src/test/**"
+        }
+    }
+    test {
+        java {
+            srcDirs = ["src/test"]
+        }
+    }
+}
+
+dependencies {
+    implementation 'org.apache.httpcomponents:httpclient:4.5.14'
+
+    implementation 'com.google.protobuf:protobuf-gradle-plugin:0.9.1'
+    implementation 'com.google.protobuf:protobuf-java:3.21.7'
+
+    implementation 'org.mockito:mockito-core:4.0.0'
+    implementation 'org.mockito:mockito-all:1.10.19'
+    implementation 'org.mockito:mockito-inline:4.0.0'
+
+    implementation 'org.apache.poi:poi-ooxml:5.2.2'
+
+    implementation 'org.apache.logging.log4j:log4j-api:2.17.2'
+    implementation 'org.apache.logging.log4j:log4j-core:2.17.2'
+
+    implementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+
+    implementation 'org.ow2.sat4j:org.ow2.sat4j.core:2.3.6'
+    implementation 'com.google.code.gson:gson:2.10'
+}
+
+test {
+    useJUnitPlatform()
+}
