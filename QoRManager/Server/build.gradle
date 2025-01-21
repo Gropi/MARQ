@@ -44,9 +44,9 @@ dependencies {
     implementation 'com.google.protobuf:protobuf-gradle-plugin:0.9.1'
     implementation 'com.google.protobuf:protobuf-java:3.21.7'
 
-    implementation 'org.mockito:mockito-core:4.0.0'
+    implementation 'org.mockito:mockito-core:5.15.2'
     implementation 'org.mockito:mockito-all:1.10.19'
-    implementation 'org.mockito:mockito-inline:4.0.0'
+    implementation 'org.mockito:mockito-inline:5.2.0'
 
     implementation 'org.apache.poi:poi-ooxml:5.2.2'
 

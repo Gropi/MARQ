@@ -277,7 +277,7 @@ namespace Collector.DockerHandeling
             await m_Client.Containers.CreateContainerAsync(new CreateContainerParameters()
             {
                 Name = "Container" + m_ContainerCount,
-                Image = "schnapsdrossel_quintin:latest",
+                Image = "dummy_container:latest",
                 HostConfig = new HostConfig()
                 {
                     PortBindings = portBindings,

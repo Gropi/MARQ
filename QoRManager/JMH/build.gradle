@@ -28,15 +28,3 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-jmh {
-    warmupIterations = 2
-    iterations = 5
-    fork = 2 // How many times to forks a single benchmark. Use 0 to disable forking altogether
-    zip64 = true // Use ZIP64 format for bigger archives
-    //timeUnit = 'ms' // Output time unit. Available time units are: [m, s, ms, us, ns].
-    resultFormat = 'CSV' // Result format type (one of CSV, JSON, NONE, SCSV, TEXT)
-    verbosity = 'NORMAL' // Verbosity mode. Available modes are: [SILENT, NORMAL, EXTRA]
-    threads = 4 // Number of worker threads to run with.
-    humanOutputFile = project.file("${project.buildDir}/reports/jmh/human.txt") // human-readable output file
-    resultsFile = project.file("${project.buildDir}/reports/jmh/results.txt") // results file
-}

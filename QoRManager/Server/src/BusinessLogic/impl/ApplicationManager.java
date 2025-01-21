@@ -196,7 +196,7 @@ public class ApplicationManager implements IApplication {
             var terminatedVertex = _DecisionMaker.getVertexMicroserviceID(terminationMessage.getUUID());
             var listOfEdges = _DecisionMaker.getOutgoingEdge(terminatedVertex);
             if (listOfEdges.isEmpty()) {
-                _Logger.info("ATTENZIONE/ACHTUNG/ATTENTION PLEASE/BLYAT/GING ZHU YI/JA MOIN: No outgoing edges. This should only happen if graph terminates.");
+                _Logger.info("No outgoing edges. This should only happen if graph terminates.");
             }
 
             synchronized (_Measurement) {

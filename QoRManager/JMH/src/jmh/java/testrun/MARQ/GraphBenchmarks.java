@@ -98,47 +98,6 @@ public class GraphBenchmarks {
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.AverageTime) //Mode.All
-    @Warmup(iterations = 3)
-    @Measurement(iterations = 30)
-    @OutputTimeUnit(TimeUnit.MICROSECONDS)
-    public void DijkstraTopsisMergedEConstraintBenchmarkAverageTime(GraphState state, Blackhole blackhole) {
-        var chosenGraph = getCurrentGraph(state);
-
-        var instanceUnderTest = new EdgeDiCManager(chosenGraph, _Conditions, _Constraints, _Weights, _NormalizingMode, _MostImportantCriteria, _Logger, "topsisMergedEConstraint");
-        instanceUnderTest.getInitialSelection(Integer.MAX_VALUE, null);
-        blackhole.consume(instanceUnderTest);
-    }
-
-    @Benchmark
-    @BenchmarkMode(Mode.AverageTime) //Mode.All
-    @Warmup(iterations = 3)
-    @Measurement(iterations = 30)
-    @OutputTimeUnit(TimeUnit.MICROSECONDS)
-    public void DijkstraTopsisWithBackupBenchmarkAverageTime(GraphState state, Blackhole blackhole) {
-        var chosenGraph = getCurrentGraph(state);
-
-        var instanceUnderTest = new EdgeDiCManager(chosenGraph, _Conditions, _Constraints, _Weights, _NormalizingMode, _MostImportantCriteria, _Logger, "topsisWithBackup");
-        instanceUnderTest.getInitialSelection(Integer.MAX_VALUE, null);
-        blackhole.consume(instanceUnderTest);
-    }
-
-    @Benchmark
-    @BenchmarkMode(Mode.AverageTime) //Mode.All
-    @Warmup(iterations = 3)
-    @Measurement(iterations = 30)
-    @OutputTimeUnit(TimeUnit.MICROSECONDS)
-    public void TOPSISIterativeBenchmarkAverageTime(GraphState state, Blackhole blackhole) {
-        var chosenGraph = getCurrentGraph(state);
-
-        var instanceUnderTest = new EdgeDiCManager(chosenGraph, _Conditions, _Constraints, _Weights,
-                _NormalizingMode, _MostImportantCriteria,
-                _Logger, "topsisIterative");
-        instanceUnderTest.getInitialSelection(Integer.MAX_VALUE, null);
-        blackhole.consume(instanceUnderTest);
-    }
-
-    @Benchmark
     @BenchmarkMode(Mode.AverageTime)
     @Warmup(iterations = 3)
     @Measurement(iterations = 30)
@@ -148,19 +107,6 @@ public class GraphBenchmarks {
 
         var instanceUnderTest = new EdgeDiCManager(chosenGraph, _Conditions, _Constraints, _Weights, _NormalizingMode,
                 _MostImportantCriteria, _Logger, IShortestPathAlgorithm.MODE_ECONSTRAINT);
-        instanceUnderTest.getInitialSelection(Integer.MAX_VALUE, null);
-        blackhole.consume(instanceUnderTest);
-    }
-
-    @Benchmark
-    @BenchmarkMode(Mode.AverageTime)
-    @Warmup(iterations = 3)
-    @Measurement(iterations = 30)
-    @OutputTimeUnit(TimeUnit.MICROSECONDS)
-    public void DijkstraLexicographicBenchmarkAverageTime(GraphState state, Blackhole blackhole) {
-        var chosenGraph = getCurrentGraph(state);
-
-        var instanceUnderTest = new EdgeDiCManager(chosenGraph, _Conditions, _Constraints, _Weights, _NormalizingMode, _MostImportantCriteria, _Logger, "lexicographic");
         instanceUnderTest.getInitialSelection(Integer.MAX_VALUE, null);
         blackhole.consume(instanceUnderTest);
     }

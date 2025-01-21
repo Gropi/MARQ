@@ -28,10 +28,9 @@ public class Startup {
         var monitoringFacade = new MonitoringFacade();
         var connectionFacade = new ConnectionFacade(monitoringFacade);
 
-        QoRManager qorManager;
         var microserviceHandler = new MicroserviceHandler(_Logger, connectionFacade);
 
-        // TODO: Wieso sollte das der Fall sein?
+        QoRManager qorManager;
         if(testbedParameters.isEmpty()) {
             qorManager = new QoRManager(startParameters, microserviceHandler, connectionFacade);
         }else{
