@@ -19,14 +19,11 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ConnectionFacade implements IConnectionFacade {
     private static final Logger _Logger = LogManager.getRootLogger();
     private final Map<Integer, IServer> _CurrentlyRunningServer;
-    private IMonitoringFacade _MonitoringFacade;
     private Map<String, IClient> _OpenClients;
 
-    // TODO: Checken, ob wir die MonitoringFacde hier brauchen, ich bezweifle es.
-    public ConnectionFacade(IMonitoringFacade monitoringFacade) {
+    public ConnectionFacade() {
         _CurrentlyRunningServer = new HashMap();
         _OpenClients = new ConcurrentHashMap<>();
-        _MonitoringFacade = monitoringFacade;
     }
 
     @Override

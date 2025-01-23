@@ -269,16 +269,6 @@ public class QoRManager implements IConsoleInputListener, IMessageReceivedListen
                     _CurrentDecisionMaker = SupportedDecisionMakers.TOPSIS;
                 else if (!m_DecisionMakersDone.contains(SupportedDecisionMakers.ECONSTRAINT))
                     _CurrentDecisionMaker = SupportedDecisionMakers.ECONSTRAINT;
-                /*else if (!m_DecisionMakersDone.contains(SupportedDecisionMakers.TOPSIS_WITH_BACKUP))
-                    _CurrentDecisionMaker = SupportedDecisionMakers.TOPSIS_WITH_BACKUP;
-                else if (!m_DecisionMakersDone.contains(SupportedDecisionMakers.TOPSIS_WITH_ECONSTRAINT))
-                    _CurrentDecisionMaker = SupportedDecisionMakers.TOPSIS_WITH_ECONSTRAINT;
-                else if (!m_DecisionMakersDone.contains(SupportedDecisionMakers.TOPSIS_ITERATIVE))
-                    _CurrentDecisionMaker = SupportedDecisionMakers.TOPSIS_ITERATIVE;
-                else if (!m_DecisionMakersDone.contains(SupportedDecisionMakers.PROMETHEE))
-                    _CurrentDecisionMaker = SupportedDecisionMakers.PROMETHEE;
-                else if (!m_DecisionMakersDone.contains(SupportedDecisionMakers.LEXICOGRAPHIC))
-                    _CurrentDecisionMaker = SupportedDecisionMakers.LEXICOGRAPHIC;*/
                 else if (!m_DecisionMakersDone.contains(SupportedDecisionMakers.MOBIDIC))
                     _CurrentDecisionMaker = SupportedDecisionMakers.MOBIDIC;
                 else
@@ -316,8 +306,7 @@ public class QoRManager implements IConsoleInputListener, IMessageReceivedListen
                     m_CurrentGraph = generator.generateGraph();
                 } else {
                     var graphLoader = new GraphOnlineParser(_Logger);
-                    //m_CurrentGraph = graphLoader.loadBaseGraph(graphLocation, null);
-                    // TODO: Muss raus, wenn wir nicht randomizen wollen.
+
                     //Because we want to randomize the costs here we choose a new UUID for our graph
                     var graphID = UUID.randomUUID();
                     var creator = new TestGraphCreator(_Logger);
@@ -352,51 +341,6 @@ public class QoRManager implements IConsoleInputListener, IMessageReceivedListen
 
             var normalizingMode = NormalizationMode.LINEAR;
 
-            var defaultPreferenceFunction = "u";
-            var uShapePreferenceFunction = "us";
-            var vShapePreferenceFunction = "vs";
-            var levelPreferenceFunction = "le";
-            var vShapeWithIndifferencePreferenceFunction = "li";
-            var gaussPreferenceFunction = "g";
-
-            Double[] defaultPreferenceParameters = {};
-            Double[] uShapePreferenceParameters = {50d};
-            Double[] vShapePreferenceParameters = {100d};
-            Double[] levelPreferenceParameters = {50d, 150d};
-            Double[] vShapeWithIndifferencePreferenceParameters = {50d, 150d};
-            Double[] gaussPreferenceParameters = {15d};
-
-            var preferenceFunctions = new String[valuesOfInterest.size()];
-            var preferenceParameters = new Double[valuesOfInterest.size()][];
-            for(int i = 0; i < preferenceFunctions.length; i++) {
-                String chosenFunctionForCriteria;
-                var randValue = new Random().nextInt(1, 7);
-
-                if(randValue == 1) {
-                    chosenFunctionForCriteria = defaultPreferenceFunction;
-                    preferenceParameters[i] = defaultPreferenceParameters;
-                } else if(randValue == 2) {
-                    chosenFunctionForCriteria = uShapePreferenceFunction;
-                    preferenceParameters[i] = uShapePreferenceParameters;
-                } else if(randValue == 3) {
-                    chosenFunctionForCriteria = vShapePreferenceFunction;
-                    preferenceParameters[i] = vShapePreferenceParameters;
-                } else if(randValue == 4) {
-                    chosenFunctionForCriteria = levelPreferenceFunction;
-                    preferenceParameters[i] = levelPreferenceParameters;
-                } else if(randValue == 5) {
-                    chosenFunctionForCriteria = vShapeWithIndifferencePreferenceFunction;
-                    preferenceParameters[i] = vShapeWithIndifferencePreferenceParameters;
-                } else if(randValue == 6) {
-                    chosenFunctionForCriteria = gaussPreferenceFunction;
-                    preferenceParameters[i] = gaussPreferenceParameters;
-                } else {
-                    throw new RuntimeException("Apparently you chose the wrong bound or removed preferenceFunctions");
-                }
-
-                preferenceFunctions[i] = chosenFunctionForCriteria;
-            }
-
             IDecisionMaking decisionMaker;
             if (SupportedDecisionMakers.MOBIDIC.equalsName(startMessage.getApplicationName())){
                 decisionMaker = new MobiDiCManager(m_CurrentGraph);
@@ -414,7 +358,7 @@ public class QoRManager implements IConsoleInputListener, IMessageReceivedListen
             addApplication(app);
             _Logger.info("Starting application \"" + startMessage.getApplicationName() + "\"...");
             app.run();
-            Thread.sleep(10);
+            Thread.sleep(50);
 
             if (!app.isRunning()) {
                 removeApplication(app);

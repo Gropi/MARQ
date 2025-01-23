@@ -92,8 +92,7 @@ public class GraphOnlineParser {
             var graphElement = doc.createElement("graph");
             graphElement.setAttribute("id", "Graph");
             graphElement.setAttribute("uidGraph", graph.getGraphID().toString());
-            //TODO: Weil wir die UIDEdge nicht nutzen, sie allerdings per default in den Graphml-Dateien vorhanden ist,
-            // tragen wir einen beliebigen Wert ein. Was soll schon passieren? lul
+            // INFO: Because we do not use the UIDEdge, but it is present in the graphml files by default, we enter an arbitrary value.
             graphElement.setAttribute("uidEdge", UUID.randomUUID().toString());
             rootElement.appendChild(graphElement);
 
@@ -128,7 +127,6 @@ public class GraphOnlineParser {
             vertexElement.setAttribute("mainText", vertex.getLabel());
             vertexElement.setAttribute("upText", "");
             vertexElement.setAttribute("size", "30");
-            //Positionen nur grob damit sich nicht alle überlappen, TODO: nochmal schöner machen
             vertexElement.setAttribute("positionX", 10 + vertex.getApplicationIndex()*50 + vertex.getApproximationIndex()*5 + "");
             vertexElement.setAttribute("positionY", 50 + vertex.getStage() * 50 + "");
 
@@ -147,8 +145,6 @@ public class GraphOnlineParser {
             vertexElement.setAttribute("parameter3", vertex.getWeight(MeasurableValues.PARAMETER_3.name()).getValue().toString());
             vertexElement.setAttribute("parameter4", vertex.getWeight(MeasurableValues.PARAMETER_4.name()).getValue().toString());
             vertexElement.setAttribute("parameter5", vertex.getWeight(MeasurableValues.PARAMETER_5.name()).getValue().toString());
-            //TODO: Possible additions that have been used in the past but are not really stored in the vertex
-            //vertexElement.setAttribute("executionTimeBound", ??);
 
             //Add element to graph
             graph.appendChild(vertexElement);
@@ -175,7 +171,7 @@ public class GraphOnlineParser {
 
             //Own attributes
             edgeElement.setAttribute("transmissionTime", edge.getWeight(MeasurableValues.LATENCY.name()).getValue().toString());
-            //TODO: Possible additions that have been used in the past but are not really stored in the edge
+            //INFO: Possible additions that have been used in the past but are not really stored in the edge
             //edgeElement.setAttribute("transmissionTimeBound", ??);
 
             //Add element to graph

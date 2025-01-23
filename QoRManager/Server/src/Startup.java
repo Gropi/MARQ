@@ -1,6 +1,5 @@
 import ApplicationSupport.impl.ApplicationParameter;
 import AvailableResources.impl.MicroserviceHandler;
-import Monitoring.Facade.impl.MonitoringFacade;
 import Network.Connection.impl.ConnectionInformation;
 import Console.ThreadSafeConsoleHandler;
 import BusinessLogic.impl.MyLogManager;
@@ -25,8 +24,7 @@ public class Startup {
         var consoleHandler = new ThreadSafeConsoleHandler();
         var testbedParameters = getTestbedParameters(args);
 
-        var monitoringFacade = new MonitoringFacade();
-        var connectionFacade = new ConnectionFacade(monitoringFacade);
+        var connectionFacade = new ConnectionFacade();
 
         var microserviceHandler = new MicroserviceHandler(_Logger, connectionFacade);
 

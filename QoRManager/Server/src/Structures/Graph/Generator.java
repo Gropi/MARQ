@@ -51,8 +51,7 @@ public class Generator {
         determineNodeInformation(graph, "Nodes");
         determineApproximateCosts(graph, "Costs");
 
-        // TODO: ELIAS FRAGEN WAS DAS BEDEUTET?
-        //PROBABLY NOT IDEAL - WAS DEVELOPED FOR MOBIDIC
+        // This logic is not only needed for MOBIDIC - might have an impact on the execution time.
         setGraphStages(graph, graph.getStart());
 
         return graph;

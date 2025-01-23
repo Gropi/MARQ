@@ -75,7 +75,6 @@ public class CriteriaBenchmark {
         for(int paramter = 1; paramter <= maxParameterCount; paramter++) {
             m_Parameter.add(new Pair<>("Parameter" + paramter, r.nextBoolean()));
 
-            // TODO: warum ist das nicht implementiert?
             //LIMITS
             var limitMap = new HashMap<String, Number>();
             for(int i = 1; i <= paramter; i++) {
@@ -83,8 +82,6 @@ public class CriteriaBenchmark {
             }
             m_Criteria.put(paramter, limitMap);
 
-            // Warum pre weights?
-            //--WEIGHTS
             var preweights = new Integer[paramter];
             var totalWeights = 0;
             for(int i = 0; i < paramter; i++) {
@@ -228,14 +225,12 @@ public class CriteriaBenchmark {
 
     private void EConstraintBenchmark(Blackhole blackhole) {
         var paretoOptima = m_ParetoFilter.findOptima(m_Alternatives.subList(0, alternativeCount - 1), m_Parameter.subList(0, parameterCount - 1));
-        List<? extends IWeight> alternativesInBoundry;
+        List<? extends IWeight> alternativesInBoundary;
         var currentOptimumValue = Integer.MIN_VALUE;
 
-        alternativesInBoundry = m_BoundryFilter.filter(paretoOptima, m_Parameter.subList(0, parameterCount - 1), m_Criteria.get(parameterCount));
+        alternativesInBoundary = m_BoundryFilter.filter(paretoOptima, m_Parameter.subList(0, parameterCount - 1), m_Criteria.get(parameterCount));
 
-        // Was soll dieser Call überhaupt?
-        for (IWeight candidate : alternativesInBoundry) {
-            // TODO: Warum machen wir hier eine Prüfung auf get(0)? Vorher war da get(1).get(0). Da waren die Parameter aber noch nach Alterantiven sortiert o.O
+        for (var candidate : alternativesInBoundary) {
             var candidateValue = candidate.getWeight(m_Parameter.get(0).getFirst()).getValue().intValue();
             if (candidateValue > currentOptimumValue) {
                 currentOptimumValue = candidateValue;
@@ -243,7 +238,7 @@ public class CriteriaBenchmark {
         }
 
         blackhole.consume(paretoOptima);
-        blackhole.consume(alternativesInBoundry);
+        blackhole.consume(alternativesInBoundary);
         blackhole.consume(currentOptimumValue);
     }
 }

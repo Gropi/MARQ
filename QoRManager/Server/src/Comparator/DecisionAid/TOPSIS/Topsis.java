@@ -79,7 +79,7 @@ public class Topsis {
                     listOfActions.add(m_LastWorstSolution[c]);
                 }
 
-                vectornormalizationFactors[c] = calculateEuclideanFromValues(listOfActions, m_LastCriteria.get(c));
+                vectornormalizationFactors[c] = calculateEuclideanFromValues(listOfActions);
             } else {
                 vectornormalizationFactors[c] = 1;
             }
@@ -361,15 +361,13 @@ public class Topsis {
         return Math.sqrt(f);
     }
 
-    // TODO: Wieso wird criteria hier nicht genutzt? Was soll die Methode eigentlich machen? Was heißt von Value und man bekommt "Actions"?
     /** Helper method to calculate the euclidean of a set of parameters that correspond a specific criterion and to a
      *  list of alternatives
      *
      * @param actions the list of alternatives (named actions in original publication)
-     * @param criteria the specific criterion to determine the parameters by
      * @return the euclidean
      */
-    private Number calculateEuclideanFromValues(List<Number> actions, Pair<String, Boolean> criteria) {
+    private Number calculateEuclideanFromValues(List<Number> actions) {
         var f = Math.pow(actions.get(0).doubleValue(), 2);
         for (int j = 1; j < actions.size(); j++){
             f += Math.pow(actions.get(j).doubleValue(), 2);

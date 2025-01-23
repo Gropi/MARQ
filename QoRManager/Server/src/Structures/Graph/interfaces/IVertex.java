@@ -12,11 +12,9 @@ public interface IVertex extends IWeight{
     String getLabel();
     List<ParameterCost> getWeights();
 
-    // TODO: Change to Application Information - since this not a real information for a vertex
     int getQoR();
     void setQoR(int qor);
 
-    // TODO: Change to Application Information - since this not a real information for a vertex
     int getStage();
     void setStage(int value);
 
@@ -26,13 +24,11 @@ public interface IVertex extends IWeight{
     boolean isDecisionMakingVertex();
     void setDecisionMakingVertex(boolean isDecisionMaking);
 
-    // TODO: Change to Application Information - since this not a real information for a vertex
     int getApplicationIndex();
     void setApplicationIndex(int index);
     int getApproximationIndex();
     void setApproximationIndex(int index);
 
-    // TODO: Same here...
     String getServiceName();
     void bindMicroservice(IMicroservice service);
     IMicroservice getMicroservice();
