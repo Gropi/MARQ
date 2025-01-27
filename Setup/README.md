@@ -97,7 +97,58 @@ These columns provide a comprehensive overview of the benchmark's configuration 
 
 ## Execute Distributed Application
 
+We have provided an example application chain for the distributed execution of MARQ. To show the scalability of MARQ, we 
+have used a dummy system that starts an arbitrary number of applications and models an execution, including transfer, 
+based on this. However, with the help of encapsulation, a micro service chain can be realized as shown in Figure 1 of 
+the paper. f you encounter any problems, please do not hesitate to contact us.
+### Preparation
 
+To make the application executable, please build the **Collector** and **Encapsulation** components (refer to their respective folders in the root directory). Once you have built these projects using the provided shell scripts, copy the contents of the folder:  
+`Collector\Collector\bin\Debug\net6.0`  
+to:  
+`Setup\Live-Tests\Server-Simulation\MicroservicePipeline\_setup\collector`
+
+and the contents of the folder:  
+`Encapsulation\Encapsulation\bin\Debug\net6.0`  
+to:  
+`Setup\Live-Tests\Server-Simulation\MicroservicePipeline\_setup\encapsulation`.
+
+Next, you can build the Docker containers required for running the software.
+- To rebuild all examples, use the script `completeRebuildPipeline.sh`.
+- If you want to try the scaling example, use the script `dummyRebuild.sh`.  
+  Both scripts can be found in the folder:  
+  `Setup\Live-Tests\Server-Simulation\MicroservicePipeline\_setup\`.
+
+If you encounter any issues, first run the script `pruneDocker.sh`. If problems persist on your system, try using the 
+`noCacheRebuild.sh` script.
+
+### Execution of the Dummy Application
+
+Once you have built the dummy microservices, the collector manages the Docker containers and registers them with the 
+QoR-Manager. It is important to start the QoR-Manager first.
+
+To start the execution, you will find the script `startLiveExecution.sh` in the folder `Setup\Live-Tests\`. This script 
+will call all necessary applications and scripts, including network manipulation and the collector. **IMPORTANT:** The 
+script must be executed on every server participating in the simulation. You may need to adjust the configuration if you 
+plan to use the Big or Huge graph. Currently, the value for the number of containers to start (`containerCount`) is set 
+to 20. This value determines how many containers will be started on the respective machine. You can pass a parameter to 
+the script to specify a different number of containers (e.g., `startLiveExecution.sh 40`).
+
+If you are using multiple servers, feel free to start a different number of containers on each machine. In this case, 
+however, you will need to modify the start name configuration on each machine. To do this, edit the file 
+`Setup\Live-Tests\Server-Simulation\live\testrunServer.sh`. Ensure that the call to the collector (the last line of the 
+script) includes the correct parameters, as the dummy containers are counted sequentially. For example, if you want to 
+start containers 21 to 40 on a specific server, add the parameter `-dcsi 20` at the end of the call. In this case, set 
+`containerCount` to 21. The default value for `-dcsi` is 1.
+
+After starting the script, all containers will be registered with the QoR-Manager. Once all containers are registered, 
+you can start the test by typing `start` in the QoR-Manager's console.
+
+### Network manipulation
+By default, we start a network manipulation. We use [Pumba](https://github.com/alexei-led/pumba) for this. Pumba is a
+chaos engineering tool, which makes it possible to manipulate the network with different distributions and intensities.
+with different distributions and intensities. We manipulate 60% of the server instances. If you want to change this value, you can do so in the
+file: `Setup\Live-Tests\Server-Simulation\live\startNetworkManipulation.sh`
 
 ## Current Limitations
 

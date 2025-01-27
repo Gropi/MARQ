@@ -5,8 +5,9 @@ BASEDIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
 # Stop network manipulation
 sudo "$BASEDIR/stopNetworkingManipulation.sh" && \
 
-containerCount=20
-amountPumbaInstances=11
+# Take the transferred value or set the default value to 20
+containerCount=${1:-20}
+amountPumbaInstances=$(echo "$containerCount * 0.6" | bc)
 
 x=1
 while [ $x -le $amountPumbaInstances ]

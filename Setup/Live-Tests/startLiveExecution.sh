@@ -5,6 +5,9 @@ BASEDIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
 # Get current IP address.
 IP_ADDRESS=$(hostname -I | awk '{print $1}')
 
+# Define the amount of containers to create.
+containerCount=${1:-20}
+
 # Stop old test run
 sudo "$BASEDIR/Server-Simulation/live/stopAndRemoveAllContainer.sh" && \
 
@@ -28,13 +31,13 @@ sudo "$BASEDIR/Server-Simulation/live/stopAndRemoveAllContainer.sh" && \
 
 # Start Test Servers
 # Open a new terminal window and execute the JAR file
-gnome-terminal --title="Server Simulation" -- bash -c "sudo '$BASEDIR/Server-Simulation/live/testrunServer.sh'; exec bash"
+gnome-terminal --title="Server Simulation" -- bash -c "sudo '$BASEDIR/Server-Simulation/live/testrunServer.sh' $containerCount; exec bash"
 
 # Wait for 20 seconds, just in case the VM is slow!
 sleep 20
 
 # Start network manipulation
-sudo "$BASEDIR/Server-Simulation/live/startNetworkManipulation.sh" &
+sudo "$BASEDIR/Server-Simulation/live/startNetworkManipulation.sh $containerCount" &
 
 echo ""
 echo "---------------------------------"
