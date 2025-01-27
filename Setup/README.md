@@ -1,43 +1,108 @@
-# MARQ - Engineering <ins>M</ins>ission-Critical <ins>A</ins>I-based Software with Automated <ins>R</ins>esult <ins>Q</ins>uality Adaptation
+# Setting Up MARQ 
 
-Welcome to the repository of the MARQ Framework, a system for executing mission-critical AI-based microservice chains with the goal of meeting various constraints. This framework leverages the ability to measure the Quality of Result (QoR) and adapt the microservice chain accordingly.
+This section provides instructions and scripts for deploying MARQ on a distributed system or a local machine. Additionally, it includes scripts to execute the JMH test bed on your local device. Please note that running JMH from an Integrated Development Environment (IDE) might impact the measurements. We recommend using a JAR-based measurement approach, which closely resembles real-world usage.
 
-## Reference
-If you wish to use this work for scientific purposes, please note that it was published at the
-25th IEEE/ACM International Conference on Software Engineering (ICSE) in 2025.
+## Folder Structure
 
-## Repository Structure
-The repository is organized into several key areas. To better understand the structure, we provide descriptions of each subfolder, along with its contents and purpose. Each subfolder also includes its own `README` file, offering detailed descriptions of the specific functionalities within the folder.
+- **Live-Tests:**  
+  Contains scripts to run the QoR-Manager in live mode. In this mode, various microservices register with the QoR-Manager, which manages current conditions at the edge. For available configurations, refer to the `/QoR-Manager` directory, where all executable parameters for the QoR-Manager are described.
 
-- **Applications:**  
-  This folder contains example applications that were used in the paper to demonstrate the capabilities of the MARQ framework. These applications showcase how the framework can be applied in real-world scenarios.
+- **Performance-Evaluation:**  
+  Includes various JMH test cases for performance evaluation.
 
-- **Collector:**  
-  The Collector is the component responsible for gathering runtime data from the microservices. This data is critical for the QoRManager to make informed decisions about adapting the microservice chain. The folder includes the source code, build scripts (e.g., `buildJob.bat`), and additional documentation on how to deploy and configure the Collector. In the end, this module handles the docker management for the dummy execution. 
+- **TestData:**  
+  Contains copies of graphs from the `/QoR-Manager/TestData/Graph/Paper` directory. This data serves as input for different test scenarios.
 
-- **Encapsulation:**  
-  This folder contains the Encapsulation component, which manages the encapsulated services or containers. Depending on the configuration, it can handle tasks such as Torchserve operations, face recognition, deployment, image blurring, or dummy execution. The folder includes the application code and the necessary scripts to build and deploy the Encapsulation module. This component is mainly developed to be able to gether data from existing applications such as Torchserve, to enable the QoR-Management. 
 
-- **Graphs:**  
-  This folder contains both `base` and `randomized` graphs used during the evaluation phase. These graphs represent different levels of complexity and are utilized to test the framework under various constraints. A `README` file explains the structure and content of the graphs and provides guidance on how to use them for evaluations.
+## Executing Performance Evaluation Tests
 
-- **Protobuf:**  
-  The `Protobuf` folder contains all necessary files for automatically generating the communication protocol between the various modules used in MARQ. This ensures seamless interaction between components. Detailed instructions on generating protocol buffers and integrating them into the modules are provided in the folder's `README` file.
+To perform the performance tests, follow these steps:
 
-- **QoRManager:**  
-  The `QoRManager` folder contains the core functionality of MARQ. It includes the **Java** component that orchestrates the microservice chain and applies adaptation strategies. The QoRManager also implements various decision-making algorithms critical for optimizing the execution based on runtime data. The `README` file in this folder provides detailed instructions on how to configure, build, and execute the QoRManager.
+1. **Build the JAR Files:**
 
-- **Setup:**  
-  This folder contains the necessary tools and instructions for deploying and running the entire MARQ framework, including the microservice chains, on a Linux server. It includes Docker files, scripts for setup, and step-by-step guides for creating and running the required environment.
+  - Open the `/QoR-Manager` project using an IDE like IntelliJ.
 
-## License
-The project is licensed under the Apache License Version 2.0. For more details, see the `LICENSE` file.
+  - Navigate to the Gradle build settings:
 
-## Contributions and Special Thanks
-In addition to Uwe Gropengießer, the author and visionary behind the MARQ Framework, many individuals have contributed to its development. Special thanks go to:
+    - Go to `JMH` → `Tasks` → `jmh`.
 
-- **Prof. Dr. Max Mühlhäuser** for his invaluable support in idea generation and collaborative discussions.
-- **Elias Dietz**, who provided development support and contributed to the conceptualization of MARQ through numerous constructive discussions.
-- **Achref Doula, Florian Brandherm, Osama Abboud, and Xun Xiao**, who were always available for discussions and feedback.
+    - Build the `jmhJar` task.
 
-We extend our gratitude to everyone who contributed to making the MARQ Framework possible.
+  - This process will generate two files in the `/QoR-Manager/JMH/build/libs` directory.
+
+2. **Prepare for Test Execution:**
+
+  - Copy the generated files to the `/Setup/Performance-Evaluation/Execution/` folder.
+
+3. **Run the Performance Tests:**
+
+  - Execute the desired `.sh` scripts to start the performance tests.
+
+  - **Note:** The `startTestPerformance_full.sh` script may take several days to complete.
+
+### Post-Execution: Understanding the Results
+
+After completing the tests, two new files will be generated:
+
+- `jmh-results.csv`: Contains detailed execution information for each test case and iteration.
+
+- `jmh-result.csv`: Provides summarized information of the test runs.
+
+The `jmh-result.csv` file summarizes each benchmark, detailing:
+
+- Number of samples executed.
+
+- Execution score.
+
+- Measurement units.
+
+- Parameters used during execution.
+
+With this information, you can create the necessary graphics and data representations to illustrate the performance differences between methods.
+
+### JMH Benchmark Results
+
+The performance test results are summarized in the following table:
+
+| Benchmark                                                   | Mode | Threads | Samples | Score          | Score Error (99.9%) | Unit  | Param: alternativeCount | Param: parameterCount |
+|-------------------------------------------------------------|------|---------|---------|----------------|---------------------|-------|-------------------------|-----------------------|
+| testrun.ComparatorBenchmark.ParetoFilterBenchmarkThroughput | thrpt| 4       | 80      | 49,665,191.479 | 3,955,990.093       | ops/s | 50                      | 2                     |
+| testrun.ComparatorBenchmark.ParetoFilterBenchmarkThroughput | thrpt| 4       | 80      | 8,616,473.555  | 423,737.445         | ops/s | 50                      | 4                     |
+| testrun.ComparatorBenchmark.ParetoFilterBenchmarkThroughput | thrpt| 4       | 80      | 3,042,145.563  | 133,534.856         | ops/s | 50                      | 6                     |
+| testrun.ComparatorBenchmark.ParetoFilterBenchmarkThroughput | thrpt| 4       | 80      | 1,695,909.048  | 35,337.079          | ops/s | 50                      | 8                     |
+| testrun.ComparatorBenchmark.ParetoFilterBenchmarkThroughput | thrpt| 4       | 80      | 1,330,722.099  | 15,099.792          | ops/s | 50                      | 10                    |
+
+**Description of Columns:**
+
+- **Benchmark:** Specifies the fully qualified name of the executed benchmark test.
+
+- **Mode:** Indicates the benchmarking mode used during the test. 'thrpt' stands for 'Throughput', measuring the number of operations per unit of time.
+
+- **Threads:** Denotes the number of threads utilized during the benchmark execution.
+
+- **Samples:** Represents the number of measurement samples collected during the benchmarking process.
+
+- **Score:** Shows the primary metric value obtained from the benchmark. For throughput mode, it reflects the number of operations performed per second.
+
+- **Score Error (99.9%):** Provides the margin of error for the score with a 99.9% confidence interval, indicating the statistical uncertainty of the measured score.
+
+- **Unit:** Specifies the unit of measurement for the score. In throughput mode, this is typically 'operations per second' (ops/s).
+
+- **Param: alternativeCount:** Represents a parameter used in the benchmark, with its corresponding value.
+
+- **Param: parameterCount:** Another benchmark parameter, with its corresponding value.
+
+These columns provide a comprehensive overview of the benchmark's configuration and performance metrics, allowing for detailed analysis and comparison of different test scenarios.
+
+
+## Execute Distributed Application
+
+
+
+## Current Limitations
+
+As this software is intended for experimental purposes, there are certain limitations when executing MARQ, especially in a distributed manner:
+
+- **Microservice Naming:**  
+  The mapping from a microservice to a node in the graph is based on the name of the Docker container. Each Docker container connects to the QoR-Manager using this identifier. Therefore, the identifier must be unique and correspond exactly to its representation in the graph.
+
