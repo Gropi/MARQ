@@ -66,3 +66,106 @@ The Collector repository includes a script named `buildJob.bat`, which compiles 
 ### Deployment
 - The compiled files can be copied into a Docker container for deployment.
 - Detailed instructions for building and deploying the Docker container can be found in the **Setup** section of the repository.
+
+
+## **Project Structure**
+```
+Collector
+│── Collector.csproj          # Project configuration file
+│── nlog.config               # Logging configuration
+│── Program.cs                # Main entry point of the application
+│
+├── Businesslogic
+│   │── CollectorBusinesslogic.cs   # Core business logic
+│   │── ContainerHandlingLogic.cs   # Logic for handling container interactions
+│
+├── Communication
+│   ├── DataModel
+│   │   ├── CommunicationMessages.cs   # Data model for communication messages
+│
+├── Data
+│   │── Measurement.cs   # Data representation for measurements
+│
+├── DockerHandeling
+│   │── Container.cs       # Representation of a Docker container
+│   │── DockerHandler.cs   # Handles Docker-related operations
+│
+├── MeasurementExecution
+│   │── Boundries.cs             # Defines measurement boundaries
+│   │── IMeasurmenetUnit.cs      # Interface for measurement units
+│   │
+│   ├── CpuCollection
+│   │   ├── CpuUnit.cs           # CPU measurement unit implementation
+│   │
+│   ├── DataModel
+│   │   ├── MeasurementListener.cs   # Listens for measurement data
+│   │
+│   ├── Dummy
+│   │   ├── DummyCollection.cs   # Dummy measurement collection
+│   │
+│   ├── MemoryCollection
+│   │   ├── MemoryUnit.cs        # Memory measurement unit implementation
+│   │
+│   ├── PingExecution
+│   │   ├── IRunPing.cs          # Interface for running ping operations
+│   │   ├── impl
+│   │       ├── ICMPPings.cs     # Handles ICMP ping execution
+│   │       ├── PingExecutor.cs  # Ping execution logic
+│   │       ├── TCPPing.cs       # Handles TCP ping execution
+│
+├── Parser
+│   ├── Objects
+│   │   ├── IExcelParsable.cs   # Interface for Excel parsing
+│
+├── Properties
+│   │── launchSettings.json       # Launch settings configuration
+│   │── Resources.Designer.cs     # Auto-generated resource designer
+│   │── Resources.resx            # Resource file
+│
+├── Simulation
+│   │── ConsoleInputReader.cs    # Reads console input for simulations
+│   │── SimulatedParameter.cs    # Defines simulated parameters
+```
+
+## **Description of Key Components**
+
+### **1. Core Components**
+- `Collector.csproj`: The main project file containing configuration details.
+- `Program.cs`: The entry point of the application.
+- `nlog.config`: Configuration for logging using NLog.
+
+### **2. Business Logic (`Businesslogic/`)**
+- Implements core business functionalities including container handling.
+
+### **3. Communication (`Communication/DataModel/`)**
+- Defines data models for internal and external communication messages.
+
+### **4. Data Handling (`Data/`)**
+- Contains classes for measurement data representation.
+
+### **5. Docker Handling (`DockerHandeling/`)**
+- Manages interactions with Docker containers.
+
+### **6. Measurement Execution (`MeasurementExecution/`)**
+- Implements different types of measurement execution:
+   - `CpuCollection/`: CPU monitoring.
+   - `MemoryCollection/`: Memory usage monitoring.
+   - `PingExecution/`: Handles network latency and connectivity checks.
+   - `Dummy/`: A placeholder for test measurements.
+
+### **7. Parsing (`Parser/`)**
+- Contains parsing utilities, including interfaces for parsing Excel files.
+
+### **8. Properties (`Properties/`)**
+- Contains launch settings and resource files.
+
+### **9. Simulation (`Simulation/`)**
+- Implements tools for simulation-based testing, including console input handling.
+
+## **Usage**
+- This project is structured to support modular implementation of various measurement tasks.
+- Users can extend the system by adding new measurement execution modules.
+
+---
+
+This document provides an overview of the **Collector** project structure and can be used as a reference for future development and maintenance.

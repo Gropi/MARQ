@@ -60,4 +60,125 @@ The Encapsulation module includes a script named `buildJob.bat`, which compiles 
 ### Note
 - The Encapsulation application is designed to work with different container services, such as Torchserve, Face Recognition, and others. Ensure you select the appropriate container mode by providing the correct command-line arguments when starting the application.
 
+## **Project Structure**
+```
+Encapsulation
+│── buildJob.bat               # Build script
+│── Encapsulation.sln          # Solution file for the project
+│── README.md                  # Project documentation
+│
+├── CommonLibrary              # Shared library for common utilities
+│   │── Communication           # Handles communication interfaces
+│   │   │── ICommunicationFacade.cs
+│   │   │
+│   │   ├── Connection          # Manages connections
+│   │   │   │── IClient.cs
+│   │   │   │── IServer.cs
+│   │   │   ├── impl
+│   │   │       │── AsynchronousSocketListener.cs
+│   │   │       │── Client.cs
+│   │   │       │── Server.cs
+│   │   │
+│   │   ├── DataModel           # Defines communication data models
+│   │   │   │── ConnectionInformation.cs
+│   │   │   │── NetworkConversation.cs
+│   │   │
+│   │   ├── Facade
+│   │   │   │── CommunicationFacade.cs
+│
+│   ├── IO                      # Input/Output handling
+│   │   │── IOHandler.cs
+│   │   ├── impl
+│   │       │── IOHandlerImpl.cs
+│
+│   ├── Parser                  # Parsing utilities
+│   │   │── IExcelParser.cs
+│   │   ├── impl
+│   │   │   │── ExcelParser.cs
+│   │   ├── Objects
+│   │       │── IExcelParsable.cs
+│
+│   ├── Properties              # Resource and localization files
+│       │── Resources.Designer.cs
+│       │── Resources.resx
+│
+├── Encapsulation               # Core implementation of the project
+│   │── Encapsulation.csproj
+│   │── Encapsulation.csproj.user
+│   │── nlog.config             # Logging configuration
+│   │── Program.cs              # Main entry point
+│
+│   ├── Businesslogic           # Core business logic
+│   │   │── DeployerBL.cs
+│   │   │── DummyExecutionBL.cs
+│   │   │── FREncapsulationBL.cs
+│   │   │── MagickBlurringBL.cs
+│   │   │── TSEncapsulationBL.cs
+│
+│   ├── Communication
+│   │   ├── DataModel           # Handles communication-related data
+│   │       │── CommunicationMessages.cs
+│   │       │── FoundObject.cs
+│   │       │── ImageProcesser.cs
+│   │       │── Person.cs
+│   │       │── VectorClock.cs
+│
+│   ├── Helper
+│   │   │── ICommunicationHelper.cs
+│   │   ├── impl
+│   │       │── CommunicationHelper.cs
+│
+│   ├── Properties              # Application settings
+│   │   │── launchSettings.json
+│   │   │── Resources.Designer.cs
+│   │   │── Resources.resx
+│
+│   ├── Simulation              # Handles simulated executions
+│   │   │── SimulatedParameter.cs
+│
+├── TestEncapsulation           # Unit tests for Encapsulation
+│   │── TestEncapsulation.csproj
+│   │── Usings.cs
+│
+│   ├── Businesslogic
+│   │   │── DummyExecutionBL_Test.cs
+│   │   │── TSEncapsulationBL_Test.cs
+│
+│   ├── Communication
+│   │   ├── DataModel           # Tests for communication models
+│   │       │── VectorClock_Test.cs
+│
+│   ├── Helper                  # Test helper utilities
+│       │── TestHelper.cs
+```
+
+### **Description of Key Components**
+
+#### **1. Core Components**
+- `Encapsulation.sln`: The solution file containing the main project structure.
+- `Program.cs`: The entry point of the application.
+- `nlog.config`: Configuration for logging functionalities.
+- `buildJob.bat`: A build script to automate the build process.
+
+#### **2. Common Library (`CommonLibrary/`)**
+- Contains core utilities used throughout the project.
+- Manages communication interfaces, connection handling, and data modeling.
+- Implements an I/O handler and Excel parsing utilities.
+
+#### **3. Business Logic (`Encapsulation/Businesslogic/`)**
+- Implements various business logic components, including deployment and execution logic.
+
+#### **4. Communication (`Encapsulation/Communication/`)**
+- Defines communication structures, including messages and object processing.
+
+#### **5. Simulation (`Encapsulation/Simulation/`)**
+- Implements functionalities for running simulations using simulated parameters.
+
+#### **6. Testing (`TestEncapsulation/`)**
+- Contains unit tests for different components, including business logic, communication models, and helpers.
+
+### **Usage**
+- This project is designed to encapsulate multiple functionalities, ensuring modularity.
+- Tests are structured to validate different business logic components.
+- Logging is managed via `nlog.config` to provide debugging insights.
 

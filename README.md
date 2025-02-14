@@ -30,6 +30,53 @@ The repository is organized into several key areas. To better understand the str
 - **Setup:**  
   This folder contains the necessary tools and instructions for deploying and running the entire MARQ framework, including the microservice chains, on a Linux server. It includes Docker files, scripts for setup, and step-by-step guides for creating and running the required environment.
 
+## Project Dependencies
+Below you can find the current dependencies on 3rd party libraries. A current version can always be found in the 
+respective `build.gradle` files.
+
+| Library                                              | Version | Description                                                                  |
+|------------------------------------------------------|--------|------------------------------------------------------------------------------|
+| **JDK**                                              | 18.0.2 | The minimum Java environment for running the software.                       |
+| **Apache HttpClient**                                | 4.5.14 | A robust HTTP client for communication over HTTP protocols.                  |
+| **Google Protocol Buffers (protobuf-gradle-plugin)** | 0.9.1  | A Gradle plugin for integrating Protocol Buffers into the build process.     |
+| **Google Protocol Buffers (protobuf-java)**          | 3.21.7 | A library for serializing structured data using Protocol Buffers.            |
+| **Mockito Core**                                     | 5.15.2 | Core library for creating mock objects in unit tests.                        |
+| **Mockito All**                                      | 1.10.19 | A comprehensive package containing all Mockito modules for mocking in tests. |
+| **Mockito Inline**                                   | 5.2.0  | Enables inline mocking capabilities with Mockito.                            |
+| **Apache POI (POI-OOXML)**                           | 5.2.2  | A library for reading and writing Microsoft Office Open XML file formats.    |
+| **Apache Log4j API**                                 | 2.17.2 | The API component of the Log4j logging framework.                            |
+| **Apache Log4j Core**                                | 2.17.2 | The core implementation of the Log4j logging framework.                      |
+| **JUnit Jupiter**                                    | 5.8.2  | The JUnit 5 framework for writing and executing tests.                       |
+| **JUnit Jupiter Engine**                             | 5.8.2  | The test engine for running JUnit 5 tests.                                   |
+| **Google Gson**                                      | 2.10.1 | A library for converting Java objects to JSON and vice versa.                |
+| **Atomfinger ToUUID**                                | 1.0.1  | A utility library for converting data into UUIDs.                            |
+| **JetBrains Annotations**                            | 20.1.0 | Annotations to aid in code analysis and improve code quality.                |
+| **OpenJDK JMH Core**                                 | 1.36   | The core library for the Java Microbenchmarking Harness (JMH).               |
+| **OpenJDK JMH Generator Annotation Processor**       | 1.36   | An annotation processor for generating benchmarking code with JMH.           |
+
+## Hardware Requirements
+
+The hardware dependencies refer to the execution of MARQ. Other additional microservice-based AI applications may have
+different requirements, so please consider them if necessary. We refer to an execution of MARQ using the dummy 
+application that demonstrates how MARQ works.
+### Minimum Requirements
+
+- **Processor**: 2 GHz dual-core.
+- **Memory (RAM)**: 12 GB.
+- **Storage**: 100 MB of available disk space, after installed JDK.
+- **Network**: Available connection to the microservices.
+
+### Recommended Requirements
+
+- **Processor**: 3 GHz quad-core.
+- **Memory (RAM)**: 16 GB.
+- **Storage**: 250 MB of available disk space, after installed JDK.
+- **Network**: Available connection to the microservices.
+
+### Additional Requirements
+
+- **Operating System**: Windows 11 and Ubuntu 20.04.
+
 ## License
 The project is licensed under the Apache License Version 2.0. For more details, see the `LICENSE` file.
 

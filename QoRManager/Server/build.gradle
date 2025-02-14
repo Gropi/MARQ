@@ -62,8 +62,6 @@ dependencies {
     implementation 'io.github.atomfinger:atomfinger-touuid:1.0.1'
 
     implementation project(':Shared')
-
-    implementation 'org.ow2.sat4j:org.ow2.sat4j.core:2.3.6'
 }
 
 test {

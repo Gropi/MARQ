@@ -68,3 +68,61 @@ Below is an example of how to start the application with all necessary parameter
 
 ```bash
 -i 10.130.22.54 -p 2000 -an TestApplication -gl ./TestData/Graph/Paper/normal.graphml -dm all -tr 10 -dlr 4000,500...5500
+```
+
+## **Project Structure**
+```
+QoRManager
+│
+├── Server                      # Main server-side implementation
+│   │── build.gradle            # Build configuration for the server
+│   │── src                     # Source code
+│   │   ├── ApplicationSupport  # Application parameter handling
+│   │   ├── AvailableResources  # Management of microservices
+│   │   ├── BusinessLogic       # Core business logic for QoRManager
+│   │   ├── Comparator          # Decision-making comparators
+│   │   ├── Condition           # Cost-based decision conditions
+│   │   ├── GraphPathSearch     # Algorithms for shortest path search
+│   │   ├── Measurement         # Measurement utilities for microservices
+│   │   ├── Parser              # Graph and application parsing
+│   │   ├── Structures          # Graph structures and utilities
+│   │   ├── resources           # Configuration files (e.g., log4j2.xml)
+│   │   ├── test                # Unit tests for different components
+│   │
+├── Shared                      # Shared components and utilities
+│   │── build.gradle            # Build configuration for shared components
+│   │── src                     # Source code for shared utilities
+│   │   ├── Console             # Console utilities
+│   │   ├── Events              # Event-handling utilities
+│   │   ├── IO                  # Input/Output handling
+│   │   ├── Monitoring          # Monitoring and logging
+│   │   ├── Network             # Network communication utilities
+│   │   ├── Services            # Microservice framework
+│   │   ├── test                # Unit tests for shared components
+│   │
+├── TestData                    # Sample data for testing
+│   │── ExampleApplication.xlsx  # Sample application data
+│   │── Graph                    # GraphML files for graph-based testing
+│   │
+├── build.gradle                 # Root Gradle build file
+├── settings.gradle               # Gradle settings file
+```
+
+### **Description of Key Components**
+
+#### **1. Server (`Server/`)**
+- Contains the core logic for handling QoR evaluation.
+- Implements decision-making algorithms for microservice quality analysis.
+- Uses network communication to interact with services.
+
+#### **2. Shared (`Shared/`)**
+- Provides common utilities such as network handling, monitoring, and event management.
+- Implements microservice communication and logging.
+
+#### **3. Test Data (`TestData/`)**
+- Includes example applications and graph-based data for evaluation and testing.
+
+### **Usage**
+- This project is designed to facilitate QoR evaluations.
+- The shared library provides reusable functionalities for different components.
+- The server manages decision-making and interactions between microservices.
