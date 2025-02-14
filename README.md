@@ -1,10 +1,23 @@
 # MARQ - Engineering <ins>M</ins>ission-Critical <ins>A</ins>I-based Software with Automated <ins>R</ins>esult <ins>Q</ins>uality Adaptation
 
-Welcome to the repository of the MARQ Framework, a system for executing mission-critical AI-based microservice chains with the goal of meeting various constraints. This framework leverages the ability to measure the Quality of Result (QoR) and adapt the microservice chain accordingly.
+Welcome to the official Git repository of the MARQ Framework. This repository serves as the central resource for accessing the source code, documentation, and development materials of MARQ.
+
+## Purpose of This Repository
+This repository provides:
+
+- The full MARQ source code, enabling modification, extension, and deployment.
+- Comprehensive documentation on setup, configuration, and execution.
+- Guidelines for contributing to MARQ’s development.
+- Example configurations and test cases for evaluating MARQ in different environments.
+
+The MARQ Framework is designed to execute mission-critical AI-based microservice chains while ensuring compliance with 
+key constraints such as execution deadlines, energy consumption, and Quality of Result (QoR). This repository contains all necessary resources to run, analyze, and extend MARQ for research and practical applications.
 
 ## Reference
 If you wish to use this work for scientific purposes, please note that it was published at the
-25th IEEE/ACM International Conference on Software Engineering (ICSE) in 2025.
+**25th IEEE/ACM International Conference on Software Engineering (ICSE) in 2025**.
+
+----
 
 ## Repository Structure
 The repository is organized into several key areas. To better understand the structure, we provide descriptions of each subfolder, along with its contents and purpose. Each subfolder also includes its own `README` file, offering detailed descriptions of the specific functionalities within the folder.
@@ -30,6 +43,7 @@ The repository is organized into several key areas. To better understand the str
 - **Setup:**  
   This folder contains the necessary tools and instructions for deploying and running the entire MARQ framework, including the microservice chains, on a Linux server. It includes Docker files, scripts for setup, and step-by-step guides for creating and running the required environment.
 
+----
 ## Project Dependencies
 Below you can find the current dependencies on 3rd party libraries. A current version can always be found in the 
 respective `build.gradle` files.
@@ -54,6 +68,7 @@ respective `build.gradle` files.
 | **OpenJDK JMH Core**                                 | 1.36   | The core library for the Java Microbenchmarking Harness (JMH).               |
 | **OpenJDK JMH Generator Annotation Processor**       | 1.36   | An annotation processor for generating benchmarking code with JMH.           |
 
+----
 ## Hardware Requirements
 
 The hardware dependencies refer to the execution of MARQ. Other additional microservice-based AI applications may have
@@ -77,9 +92,11 @@ application that demonstrates how MARQ works.
 
 - **Operating System**: Windows 11 and Ubuntu 20.04.
 
+----
 ## License
 The project is licensed under the Apache License Version 2.0. For more details, see the `LICENSE` file.
 
+----
 ## Contributions and Special Thanks
 In addition to Uwe Gropengießer, the author and visionary behind the MARQ Framework, many individuals have contributed to its development. Special thanks go to:
 
