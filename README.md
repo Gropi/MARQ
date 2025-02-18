@@ -1,6 +1,7 @@
 # MARQ - Engineering <ins>M</ins>ission-Critical <ins>A</ins>I-based Software with Automated <ins>R</ins>esult <ins>Q</ins>uality Adaptation
 
-Welcome to the official Git repository of the MARQ Framework. This repository serves as the central resource for accessing the source code, documentation, and development materials of MARQ.
+Welcome to the official Git repository of the MARQ Framework. This repository serves as the central resource for 
+accessing the source code, documentation, and development materials of MARQ.
 
 ## Purpose of This Repository
 This repository provides:
@@ -11,7 +12,26 @@ This repository provides:
 - Example configurations and test cases for evaluating MARQ in different environments.
 
 The MARQ Framework is designed to execute mission-critical AI-based microservice chains while ensuring compliance with 
-key constraints such as execution deadlines, energy consumption, and Quality of Result (QoR). This repository contains all necessary resources to run, analyze, and extend MARQ for research and practical applications.
+key constraints such as execution deadlines, energy consumption, and Quality of Result (QoR). This repository contains 
+all necessary resources to run, analyze, and extend MARQ for research and practical applications.
+
+## How to Start
+
+This section aims to provide a quick start guide for this project and direct you to resources for running the system.
+
+First and foremost, we offer an example virtual machine (VM) compatible with VirtualBox. This VM is available for 
+download at the following link: [Link](https://doi.org/10.5281/zenodo.14731335). A step-by-step guide on running the 
+software within the VM is also provided.
+
+To run the software from the Integrated Development Environment (IDE), it's essential to understand the system's 
+architecture. The primary components include:
+
+- **QoRManager**: This is the main component of our system, encompassing various decision-makers and the core business 
+logic. Instructions for starting can be found in the `QoRManager` folder.
+
+- **Microservice Chain**: To operate the QoRManager, you need a graph representation of the application you intend to 
+run and the microservices registered with the QoRManager. For a demonstration, refer to the `Setup` folder and its 
+accompanying README file for a comprehensive understanding.
 
 ## Reference
 If you wish to use this work for scientific purposes, please note that it was published at the
@@ -20,7 +40,9 @@ If you wish to use this work for scientific purposes, please note that it was pu
 ----
 
 ## Repository Structure
-The repository is organized into several key areas. To better understand the structure, we provide descriptions of each subfolder, along with its contents and purpose. Each subfolder also includes its own `README` file, offering detailed descriptions of the specific functionalities within the folder.
+The repository is organized into several key areas. To better understand the structure, we provide descriptions of each 
+subfolder, along with its contents and purpose. Each subfolder also includes its own `README` file, offering detailed 
+descriptions of the specific functionalities within the folder.
 
 - **Applications:**  
   This folder contains example applications that were used in the paper to demonstrate the capabilities of the MARQ framework. These applications showcase how the framework can be applied in real-world scenarios.
